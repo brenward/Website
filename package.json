@@ -1,0 +1,24 @@
+{
+  "name": "bwardweb.com",
+  "version": "1.0.0",
+  "description": "My site",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brenward/Website.git"
+  },
+  "author": "Bren Ward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brenward/Website/issues"
+  },
+  "homepage": "https://github.com/brenward/Website#readme",
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "path": "^0.12.7"
+  }
+}

@@ -1,0 +1,40 @@
+.tile{
+    width:22.5%;
+    height:100px;
+    margin: 1.25%;
+    background: aquamarine;
+    float:left;
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+}
+
+#container{
+    max-width:500px;
+    margin: 0 auto;
+}
+
+h1{
+    margin: 0 auto;
+    text-align: center;
+    color: pink;
+}
+
+body{
+    background: red;
+}
+
+.selected{
+    background: green;
+}
+
+.found{
+    background: purple;
+}
+
+.i{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
