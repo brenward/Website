@@ -1,5 +1,6 @@
 var tiles = $('.tile');
 var restartButton = $('#restart')[0];
+console.log(restartButton);
 var selectedTileTypeOne = 0;
 var selectedTileTypeTwo = 0;
 var selectedTileOne = -1;
