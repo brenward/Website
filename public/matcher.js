@@ -1,7 +1,12 @@
 var tiles = $('.tile');
-console.log(tiles.length);
-var selectedTileType = 0;
-var selectedTile = -1;
+var restartButton = $('#restart');
+var selectedTileTypeOne = 0;
+var selectedTileTypeTwo = 0;
+var selectedTileOne = -1;
+var selectedTileTwo = -1;
+var score = 0;
+var scoreText = $('#score')[0];
+
 var icons = {1:"fa-plus",
              2:"fa-trash",
              3:"fa-university",
@@ -11,10 +16,21 @@ var icons = {1:"fa-plus",
              7:"fa-cog",
              8:"fa-motorcycle"}
 
-randomlyAssignPairs();
-printTileTypes();
-addListeners();
+addButtonListeners();
 
+init();
+
+function init(){
+    resetTiles();
+    randomlyAssignPairs();
+    addTileListeners();
+    selectedTileTypeOne = 0;
+    selectedTileTypeTwo = 0;
+    selectedTileOne = -1;
+    selectedTileTwo = -1;
+    score = 0;
+    scoreText.innerHTML = score;
+}
 
 function randomlyAssignPairs(){
     var available = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
@@ -37,42 +53,82 @@ function printTileTypes(){
     console.log(iconOut);
 }
 
-function addListeners(){
+function addButtonListeners(){
+    restartButton[0].addEventListener("click",init);
+}
+
+function addTileListeners(){
     for(var i=0;i<tiles.length;i++){
         tiles[i].addEventListener("click",tileClicked);
     }
 }
 
 function tileClicked(){
-    console.log(this.type + "clicked");
-    if(!this.classList.contains("found")){
-        if(selectedTileType == 0){
-            this.classList.add("selected");
-            this.firstChild.classList.add(icons[this.type]);
-            selectedTileType = this.type;
-            selectedTile = this.location;
-        }else if(selectedTileType == this.type && selectedTile!=this.location){
-            tiles[selectedTile].classList.remove("selected");
-            tiles[selectedTile].classList.add("found");
-            this.classList.add("found");
-             this.firstChild.classList.add(icons[this.type]);
-            selectedTileType = 0;
-            selectedTile = -1;
-        }else if(selectedTileType != this.type){
-            tiles[selectedTile].classList.remove("selected");
-            tiles[selectedTile].firstChild.classList.remove(icons[selectedTileType]);
-            selectedTileType = 0;
-            selectedTile = -1;
+    if(!this.classList.contains("found") && !this.classList.contains("selected")){
+        keepScore();
+        if(selectedTileOne !== -1 && selectedTileTwo !== -1){
+            hideTwoTiles();
+        }
+        
+        if(selectedTileOne == -1){
+            displayCurrentTile(this, 1);    
+        }else if(selectedTileTypeOne == this.type && selectedTileOne!=this.location){
+            tilesMatched(this);
+        }else{
+            displayCurrentTile(this, 2);
         }
     }
 }
 
+function hideTwoTiles(){
+    tiles[selectedTileOne].classList.remove("selected");
+    tiles[selectedTileOne].firstChild.classList.remove(icons[selectedTileTypeOne]);
+    tiles[selectedTileTwo].classList.remove("selected");
+    tiles[selectedTileTwo].firstChild.classList.remove(icons[selectedTileTypeTwo]);
+    selectedTileOne = -1;
+    selectedTileTwo = -1;
+    selectedTileTypeOne = 0;
+    selectedTileTypeTwo = 0;
+}
 
-/*$('.tile').on("click",function(event){
-    console.log("clicked" + event.);
-    $(this).toggleClass("selected");
+function displayCurrentTile(tile, selection){
+    tile.classList.add("selected");
+    tile.firstChild.classList.add(icons[tile.type]);
     
-   $('this').fadeOut(1000,function(){
-        $('this').remove();
-    });
-});*/
+    if(selection == 1){
+        selectedTileTypeOne = tile.type;
+        selectedTileOne = tile.location;
+    }else{
+        selectedTileTwo = tile.location;
+        selectedTileTypeTwo = tile.type;
+    }
+}
+
+function tilesMatched(tile){
+    tiles[selectedTileOne].classList.remove("selected");
+    tiles[selectedTileOne].classList.add("found");
+    tile.classList.add("found");
+    tile.firstChild.classList.add(icons[tile.type]);
+    selectedTileTypeOne = 0;
+    selectedTileOne = -1;
+}
+
+function resetTiles(){
+    for(var i=0;i<tiles.length;i++){
+        tiles[i].classList.remove("selected");
+        tiles[i].classList.remove("found");
+        removeIcons(tiles[i]);
+    }
+}
+
+function removeIcons(tile){
+    var iconsSize = Object.keys(icons).length + 1;
+    for(var i=0;i<iconsSize;i++){
+        tile.firstChild.classList.remove(icons[i]);
+    }
+}
+
+function keepScore(){
+    score++;
+    scoreText.innerHTML = score;
+}

@@ -4,11 +4,14 @@
         <title>Tile Matcher</title>
         <link rel="stylesheet" type="text/css" href="matcher.css">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Ubuntu:400,700" rel="stylesheet">
         <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
     </head>
     <body>
         <h1>Match The Tiles</h1>
-        <div id="container">
+        <div class="info scoretext">Tiles Flipped: <span id="score"></span></div>
+        
+        <div id="container">            
             <div class="tile"><i class="fa fa-3x"></i></div>
             <div class="tile"><i class="fa fa-3x"></i></div>
             <div class="tile"><i class="fa fa-3x"></i></div>
@@ -26,7 +29,7 @@
             <div class="tile"><i class="fa fa-3x"></i></div>
             <div class="tile"><i class="fa fa-3x"></i></div>
         </div>
-        
+        <div class="info"><button id="restart">Restart</button></div>
         <script type="application/javascript" src="matcher.js"></script>
     </body>
 </html>
