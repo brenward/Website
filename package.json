@@ -16,6 +16,9 @@
     "url": "https://github.com/brenward/Website/issues"
   },
   "homepage": "https://github.com/brenward/Website#readme",
+  "engines": {
+    "node": "6.9.1"
+  },
   "dependencies": {
     "ejs": "^2.5.2",
     "express": "^4.14.0",
