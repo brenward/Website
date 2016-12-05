@@ -1,5 +1,5 @@
 var tiles = $('.tile');
-var restartButton = $('#restart');
+var restartButton = $('#restart')[0];
 var selectedTileTypeOne = 0;
 var selectedTileTypeTwo = 0;
 var selectedTileOne = -1;
@@ -54,7 +54,7 @@ function printTileTypes(){
 }
 
 function addButtonListeners(){
-    restartButton[0].addEventListener("click",init);
+    restartButton.addEventListener("click",init);
 }
 
 function addTileListeners(){
